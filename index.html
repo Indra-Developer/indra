@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Indhra - Java Full Stack Developer">
+    <meta property="og:description" content="Portfolio of Indhra, a Java Full Stack Developer specializing in web development, real-time projects, and scalable digital solutions.">
+    <meta property="og:image" content="img4.png"> <!-- Update with your actual live image URL -->
+    <meta property="og:url" content="https://indra-developer.github.io/"> <!-- Update with your actual URL -->
+    <meta property="og:type" content="website">
+    
+    <title>indra</title>
+    <link rel="icon" href="i2.png" type="image/x-icon">
+    <style>
+        /* ================= RESET & BASE ================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #f9fafc;
+            color: #1f2937;
+            overflow-x: hidden;
+        }
+
+        /* ================= NAVBAR ================= */
+        .navbar {
+            position: fixed;
+            width: 100%;
+            background: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 60px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+            background-color: #373ada;
+            padding: 9px;
+            border-radius: 6px;
+        }
+
+        /* Hamburger Icon */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+            z-index: 1001;
+        }
+
+        .hamburger .bar {
+            width: 25px;
+            height: 3px;
+            background-color: #333;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* ================= HERO SECTION ================= */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding-top: 80px;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.85));
+            z-index: 1;
+        }
+
+        .hero-container {
+            position: relative;
+            z-index: 2;
+            width: 85%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: fadeInUp 1.5s ease forwards;
+            gap: 40px;
+        }
+
+        .hero-left {
+            max-width: 600px;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .hero-title span {
+            color: #3b82f6;
+        }
+
+        .typing-text {
+            font-size: 24px;
+            color: #93c5fd;
+            margin-bottom: 20px;
+            min-height: 30px;
+        }
+
+        .hero-desc {
+            font-size: 16px;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            color: #e2e8f0;
+            text-align: justify;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        /* Hit-area extension for all hovering elements to stop the "stucking" flickering */
+        .btn-primary::after, .btn-outline::after, .promo-btn::after, 
+        .card::after, .project-card::after, .project-card1::after, .promo-card::after {
+            content: '';
+            position: absolute;
+            bottom: -20px; /* Covers the distance they move up */
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: transparent;
+        }
+
+        .btn-primary {
+            position: relative;
+            padding: 12px 28px;
+            background: #2563eb;
+            border: none;
+            border-radius: 30px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        .btn-primary:hover {
+            background: #1e40af;
+            transform: translateY(-4px);
+        }
+
+        .btn-outline {
+            position: relative;
+            padding: 12px 28px;
+            border: 2px solid #fff;
+            background: transparent;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+        
+        .btn-outline a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            transform: translateY(-4px);
+        }
+
+        .btn-outline:hover a {
+            color: black;
+        }
+
+        .profile-wrapper {
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            padding: 8px;
+            background: linear-gradient(135deg, #3b82f6, #6366f1);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            animation: floatProfile 6s infinite ease-in-out;
+        }
+
+        .profile-wrapper img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        /* ================= GENERAL SECTIONS ================= */
+        .section {
+            padding: 100px 8%;
+            text-align: center;
+        }
+
+        .dark {
+            background: #eef2f7;
+        }
+
+        /* ================= PROMO CARD SECTION ================= */
+        .promo-section {
+            padding: 60px 8%;
+            background: #f9fafc;
+        }
+
+        .promo-card {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            background: url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80') center/cover no-repeat;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            cursor: pointer;
+            padding: 80px 40px;
+            color: white;
+            text-align: center;
+            
+            /* Performance Fixes */
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        .promo-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 45px rgba(37, 99, 235, 0.4);
+        }
+
+        .promo-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(37, 99, 235, 0.75));
+            z-index: 1;
+        }
+
+        .promo-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .promo-content h2 {
+            font-size: 38px;
+            margin-bottom: 15px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .promo-content p {
+            font-size: 18px;
+            margin-bottom: 25px;
+            color: #e2e8f0;
+        }
+
+        .promo-btn {
+            position: relative;
+            padding: 12px 30px;
+            background: #00f7ff;
+            color: #1e1e2f;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        .promo-btn:hover {
+            background: #fff;
+            transform: translateY(-3px);
+        }
+
+        /* ================= GRID & CARDS ================= */
+        .grid-5 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            margin-top: 50px;
+            align-items: stretch;
+        }
+
+        .card, .project-card {
+            background-color: white; 
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            position: relative;
+            z-index: 1;
+            
+            /* Performance Fixes */
+            transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        .card:hover, .project-card:hover {
+            transform: translateY(-10px); 
+            background-color: #6366f1; 
+            color: white;
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
+            z-index: 10;
+        }
+
+        .card img, .project-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .project-card button {
+            margin-top: 10px;
+            padding: 8px 15px;
+            background-color: #05075f;
+            border: none;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .project-card:hover button {
+            background-color: #1e1e2f; 
+        }
+
+        .project-card button a {
+            text-decoration: none;
+            color: white;
+        }
+
+        /* ===== Projects Section Details ===== */
+        .projects-section {
+            padding: 80px 10%;
+            background: linear-gradient(135deg, #1e1e2f, #2b2b45);
+            text-align: center;
+            color: white;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: #00f7ff;
+        }
+
+        .projects-container {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .project-card1 {
+            background-color: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            padding: 30px;
+            border-radius: 20px;
+            width: 280px;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            position: relative;
+            z-index: 1;
+            
+            /* Performance Fixes */
+            transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        .project-card1:hover {
+            transform: translateY(-10px);
+            background-color: #00f7ff; 
+            color: #1e1e2f;
+            box-shadow: 0 20px 40px rgba(0, 247, 255, 0.3);
+            z-index: 10;
+            border-color: transparent;
+        }
+
+        .project-card1 h3 {
+            margin-bottom: 15px;
+        }
+
+        /* ===== Modal Popup ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background: #1e1e2f;
+            padding: 40px;
+            border-radius: 20px;
+            width: 400px;
+            max-width: 90%;
+            color: white;
+            position: relative;
+            animation: slideUp 0.3s ease;
+            text-align: left;
+        }
+
+        .modal-content h2 { color: #00f7ff; margin-bottom: 15px;}
+        .modal-content p { margin-bottom: 15px; line-height: 1.5;}
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #00f7ff;
+            transition: color 0.2s ease;
+        }
+
+        .close-btn:hover {
+            color: #ef4444;
+        }
+
+        /* ================= CONTACT FORM ================= */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 500px;
+            width: 100%;
+            margin: auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 15px;
+            border: 2px solid #eef2f7;
+            border-radius: 8px;
+            font-size: 16px;
+            background-color: #f9fafc;
+            transition: all 0.3s ease;
+            color: #1f2937;
+            outline: none;
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: #9ca3af;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: #3b82f6;
+            background-color: #ffffff;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
+
+        .contact-form button {
+            padding: 15px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .contact-form button:hover {
+            background: #1e40af;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        .success-msg {
+            display: none;
+            color: #10b981;
+            background: #d1fae5;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 10px;
+            border: 1px solid #34d399;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            margin-top: 50px;
+        }
+
+        /* ================= ANIMATIONS ================= */
+        @keyframes floatProfile {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* ================= MOBILE RESPONSIVE MEDIA QUERIES ================= */
+        @media (max-width: 900px) {
+            .hero-container {
+                flex-direction: column;
+                text-align: center;
+                margin-top: 50px;
+            }
+            .hero-desc {
+                text-align: center;
+            }
+            .hero-buttons {
+                justify-content: center;
+            }
+            .hero-right {
+                margin-top: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 30px;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%; 
+                width: 250px;
+                height: 100vh;
+                background: white;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: 0.4s ease-in-out;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 20px 0;
+            }
+
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .hero-title {
+                font-size: 36px;
+            }
+            
+            .promo-content h2 {
+                font-size: 28px;
+            }
+
+            .profile-wrapper {
+                width: 250px;
+                height: 250px;
+            }
+            
+            .section, .promo-section {
+                padding: 60px 5%;
+            }
+
+            .grid-5 {
+                grid-template-columns: 1fr; 
+            }
+            
+            .contact-form {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo"><img src="logo.png" alt="Logo" style="height: 50px; cursor: pointer;"></div>
+        
+        <div class="hamburger" id="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#indraprojects">Real-Time Projects</a></li>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a target="_blank" href="Pedapondara_Indra.pdf"
+                    style="background-color: rgb(91, 91, 218); padding: 5px 10px; border-radius: 5px; color: white; text-decoration: none;">Download Resume</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-container">
+            <div class="hero-left">
+                <h1 class="hero-title">Hello, I'm <span>Indra</span></h1>
+                <h2 class="typing-text"></h2>
+                <p class="hero-desc">
+                    I am a Java Full Stack Developer currently working at Zigzex IT Services Private Limited. I design and develop high-performance, scalable, and user-focused digital solutions with a strong emphasis on clean architecture and maintainable code. With hands-on experience across Java, web development, and real-world project building, I focus on creating efficient, responsive, and visually engaging applications that solve practical problems.
+                </p>
+                <div class="hero-buttons">
+                    <button class="btn-primary" onclick="window.location.href='mailto:pedapondaraindra@gmail.com'">Hire Me</button>
+                    <button class="btn-outline"><a href="#projects">View Projects</a></button>
+                </div>
+            </div>
+
+            <div class="hero-right">
+                <div class="profile-wrapper">
+                    <img id="profile-img" src="img4.png" alt="Profile">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REAL-TIME PROJECTS PROMO SECTION -->
+    <section class="promo-section" id="indraprojects">
+        <div class="promo-card" >
+            <div class="promo-overlay"></div>
+            <div class="promo-content">
+                <h2>Check My Real-Time Projects</h2>
+                <p>Click here to explore the practical and scalable solutions I have built.</p>
+                <a href="https://indra-developer.github.io/ZIGZEX-IT/#api-projects" ><button class="promo-btn">View Projects</button></a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="section">
+        <h2>About Me</h2>
+        <div class="grid-5">
+            <div class="card">
+                <img src="a1.jpg" alt="">
+                <h3>Who I Am</h3>
+                <p>Professional developer passionate about modern web apps.</p>
+            </div>
+            <div class="card">
+                <img src="a2.jpg" alt="">
+                <h3>Education</h3>
+                <p>BCA Graduate | MCA Pursuing.</p>
+            </div>
+            <div class="card">
+                <img src="a3.jpg" alt="">
+                <h3>Experience</h3>
+                <p>Internships & Real-world projects.</p>
+            </div>
+            <div class="card">
+                <img src="a4.jpg" alt="">
+                <h3>Vision</h3>
+                <p>Building scalable & impactful systems.</p>
+            </div>
+            <div class="card">
+                <img src="team.png" alt="">
+                <h3>Team Work</h3>
+                <p>Strong collaboration & communication.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills" class="section dark">
+        <h2>Skills</h2>
+        <div class="grid-5">
+            <div class="card">
+                <img src="https://cdn-icons-png.flaticon.com/512/732/732212.png" alt="HTML">
+                <h3>HTML</h3>
+            </div>
+            <div class="card">
+                <img src="https://cdn-icons-png.flaticon.com/512/732/732190.png" alt="CSS">
+                <h3>CSS</h3>
+            </div>
+            <div class="card">
+                <img src="javascript.png" alt="JS">
+                <h3>JavaScript</h3>
+            </div>
+            <div class="card">
+                <img src="java.png" alt="Java">
+                <h3>Java</h3>
+            </div>
+            <div class="card">
+                <img src="oracle.png" alt="Oracle">
+                <h3>ORACLE SQL</h3>
+            </div>
+            <div class="card">
+                <img src="php.png" alt="PHP">
+                <h3>PHP</h3>
+            </div>
+            <div class="card">
+                <img src="oracle.png" alt="MySQL">
+                <h3>MYSQL</h3>
+            </div>
+            <div class="card">
+                <img src="react.png" alt="React">
+                <h3>REACT JS</h3>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <h2>Projects</h2>
+        <div class="grid-5">
+            <div class="project-card">
+                <img src="mart.jpg" alt="">
+                <h3>E Mart</h3>
+                <h5>HTML, CSS, JavaScript Project</h5>
+                <button><a href="https://indra-developer.github.io/IndraMart/indraMart.html" target="_blank" class="proj">View Project</a></button>
+            </div>
+            <div class="project-card">
+                <img src="swiggy.png" alt="">
+                <h3>Swiggy clone</h3>
+                <h5>Frontend Static website</h5>
+                <button><a href="https://indra-developer.github.io/swiggy/swiggy.html" target="_blank" class="proj">View Project</a></button>
+            </div>
+            <div class="project-card">
+                <img src="atm.png" alt="">
+                <h3>ATM</h3>
+                <h5>PHP Project</h5>
+                <button onclick="alert('I will add soon')">View Project</button>
+            </div>
+            <div class="project-card">
+                <img src="calculator.png" alt="">
+                <h3>Calculator</h3>
+                <h5>JavaScript Project</h5>
+                <button><a href="https://indra-developer.github.io/calculator/index.html" target="_blank" class="proj">View Project</a></button>
+            </div>
+            <div class="project-card">
+                <img src="movie.png" alt="">
+                <h3>Booking System</h3>
+                <h5>PHP Project</h5>
+                <button><a href="http://onlinemovietickets.wuaze.com/"  class="proj">View Project</a></button>
+            </div>
+            
+        </div>
+    </section>
+    <section class="promo-section">
+        <div class="promo-card" >
+            <div class="promo-overlay"></div>
+            <div class="promo-content">
+                <h2>Check My Real-Time Projects</h2>
+                <p>Click here to explore the practical and scalable solutions I have built.</p>
+                <a href="https://indra-developer.github.io/ZIGZEX-IT/#api-projects" ><button class="promo-btn">View Projects</button></a>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects-section">
+        <h2 class="section-title">My Projects Details</h2>
+        <div class="projects-container">
+            <div class="project-card1" data-title="Swiggy Clone" data-description="A Swiggy clone built using HTML and CSS that replicates the basic layout of the original food delivery platform. Clean UI elements are implemented using pure CSS. This project demonstrates front-end design skills without using JavaScript or backend functionality." data-tech="HTML, CSS">
+                <h3>Swiggy Clone</h3>
+                <p>Click to view details</p>
+            </div>
+            <div class="project-card1" data-title="Online Movie Booking System" data-description="An Online Movie Booking System built using HTML, CSS, JavaScript, PHP, and MySQL that allows users to browse movies, check show timings, and book tickets seamlessly." data-tech="JavaScript, CSS, HTML, PHP, MySQL">
+                <h3>Online Movie Booking System</h3>
+                <p>Click to view details</p>
+            </div>
+            <div class="project-card1" data-title="Calculator" data-description="A simple calculator application built using JavaScript, HTML, and CSS that performs basic arithmetic operations with a user-friendly interface." data-tech="JavaScript, HTML, CSS">
+                <h3>Calculator</h3>
+                <p>Click to view details</p>
+            </div>
+        </div>
+    </section>
+
+    <div id="projectModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2 id="modalTitle"></h2>
+            <p id="modalDescription"></p>
+            <p><strong>Technologies:</strong> <span id="modalTech"></span></p>
+        </div>
+    </div>
+
+    <section id="services" class="section dark">
+        <h2>Services</h2>
+        <div class="grid-5">
+            <div class="card"><img src="https://cdn-icons-png.flaticon.com/512/1006/1006771.png" alt="">
+                <h3>Web Development</h3>
+            </div>
+            <div class="card"><img src="https://cdn-icons-png.flaticon.com/512/906/906175.png" alt="">
+                <h3>Backend</h3>
+            </div>
+            <div class="card"><img src="https://cdn-icons-png.flaticon.com/512/3523/3523887.png" alt="">
+                <h3>Maintenance</h3>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+    <h2>Contact</h2>
+    <form class="contact-form" id="contactForm">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Message" rows="5" required></textarea>
+        <button type="submit">Send Message</button>
+        <div id="successMsg" class="success-msg">Message sent successfully!</div>
+    </form>
+    </section>
+
+    <footer>
+        <p>© 2026 Indra | All Rights Reserved | pedapondaraindra@gmail.com | 6304963771</p>
+    </footer>
+
+    <script>
+        // --- Mobile Menu Toggle Logic ---
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+        const links = document.querySelectorAll('.nav-links li a');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+
+        // --- Typing Effect ---
+        const roles = [
+            "Frontend Developer",
+            "Java Developer",
+            "Full Stack Developer",
+            "Backend Specialist"
+        ];
+        let roleIndex = 0;
+        let charIndex = 0;
+        const typingElement = document.querySelector(".typing-text");
+
+        function typeEffect() {
+            if (charIndex < roles[roleIndex].length) {
+                typingElement.textContent += roles[roleIndex].charAt(charIndex);
+                charIndex++;
+                setTimeout(typeEffect, 80);
+            } else {
+                setTimeout(eraseEffect, 1500);
+            }
+        }
+
+        function eraseEffect() {
+            if (charIndex > 0) {
+                typingElement.textContent = roles[roleIndex].substring(0, charIndex - 1);
+                charIndex--;
+                setTimeout(eraseEffect, 40);
+            } else {
+                roleIndex = (roleIndex + 1) % roles.length;
+                setTimeout(typeEffect, 400);
+            }
+        }
+        document.addEventListener("DOMContentLoaded", typeEffect);
+
+        // --- Profile Image Slider ---
+        const profileImages = ["img2.jpeg", "img1.jpeg"];
+        const profileImg = document.getElementById("profile-img");
+        if (profileImg) {
+            setInterval(() => {
+                let randomIndex = Math.floor(Math.random() * profileImages.length);
+                profileImg.style.opacity = 0;
+                setTimeout(() => {
+                    profileImg.src = profileImages[randomIndex];
+                    profileImg.style.opacity = 1;
+                }, 300);
+            }, 5000);
+        }
+
+        // --- Modal Logic ---
+        const cards = document.querySelectorAll(".project-card1");
+        const modal = document.getElementById("projectModal");
+        const modalTitle = document.getElementById("modalTitle");
+        const modalDescription = document.getElementById("modalDescription");
+        const modalTech = document.getElementById("modalTech");
+        const closeBtn = document.querySelector(".close-btn");
+
+        cards.forEach(card => {
+            card.addEventListener("click", () => {
+                modalTitle.textContent = card.getAttribute("data-title");
+                modalDescription.textContent = card.getAttribute("data-description");
+                modalTech.textContent = card.getAttribute("data-tech");
+                modal.style.display = "flex";
+            });
+        });
+
+        closeBtn.addEventListener("click", () => {
+            modal.style.display = "none";
+        });
+
+        window.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                modal.style.display = "none";
+            }
+        });
+
+        // --- Contact Form Submission Handling ---
+        const contactForm = document.getElementById('contactForm');
+        const successMsg = document.getElementById('successMsg');
+
+        if(contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault(); 
+                
+                successMsg.style.display = 'block';
+                
+                contactForm.reset();
+                
+                setTimeout(() => {
+                    successMsg.style.display = 'none';
+                }, 4000);
+            });
+        }
+    </script>
+</body>
+
+</html>
